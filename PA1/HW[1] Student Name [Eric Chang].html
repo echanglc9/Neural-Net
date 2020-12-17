@@ -1,0 +1,202 @@
+
+<!-- saved from url=(0071)http://www.cs.bu.edu/faculty/betke/cs440/restricted/p1/p1-template.html -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title> CS440 Homework 1: HW[1] Student Name [Eric Chang]  </title>
+<style>
+<!--
+body{
+font-family: 'Trebuchet MS', Verdana;
+}
+p{
+font-family: 'Trebuchet MS', Times;
+margin: 10px 10px 15px 20px;
+}
+h3{
+margin: 5px;
+}
+h2{
+margin: 10px;
+}
+h1{
+margin: 10px 0px 0px 20px;
+}
+div.main-body{
+align:center;
+margin: 30px;
+}
+hr{
+margin:20px 0px 20px 0px;
+}
+-->
+</style>
+</head>
+
+<body>
+<center>
+<a href="http://www.bu.edu/"><img border="0" src="./HW[1] Student Name [Eric Chang]_files/bu-logo.gif" width="119" height="120"></a>
+</center>
+
+<h1>Training Neural Net and Logistic Regression</h1>
+<p> 
+ CS 440/640 Programming assignment 1 <br>
+ Eric Chang <br>
+ Edward Yun <br>
+    Date 3/6/2019
+</p>
+
+<div class="main-body">
+<hr>
+<h2> Problem Definition </h2>
+<p>
+
+In this assignment, we need to build a neural network and implement the backpropagation algorithm to train it. We also need to implement a 5 fold cross validation. This result is important so we can learn how to make a Neural Net and learn a way to prevent overfitting. We assume this will not be an easy task and we anticipate having difficulties implementing the cross validation.<br>
+
+</p>
+
+<hr>
+<h2> Method and Implementation </h2>
+<p>
+
+  For our hidden layer we used the tanh function as our activation function because we read that it is easier to optimize therefore it is more preferred to use than a sigmoid function. We implemented a function to fold the data into 5 different pieces. Then we would train 4 of those and test the remaing one to that one and then repeat til we have every fold tested to all the others. Once we get this we would then take the average and test it to the original trained data and get the accuracy.
+</p>
+
+<p>
+Below is the code we used to fold our data into 5 pieces so that we could do the cross validation. <br>
+def fold_i_of_k(dataset, i, k):<br>
+    n = len(dataset)<br>
+    return dataset[n*(i-1)//k:n*i//k]<br> 
+
+
+</p>
+
+<hr>
+<h2>Experiments</h2>
+<p>
+We ran our neural net with 3 layers (input, hidden, output), so our logestic regression would have parameters input, output, and hidden where our input = np.shape(X)[1], output = np.max(y) + 1, and hidden_dim = 10.   </p>
+
+
+
+
+<p>
+<tr>
+ 	<td>Accuracy and Confusion Matrix of All Points Nonlinear</td>
+ 	<td> <img src="./HW[1] Student Name [Eric Chang]_files/Result_of_All_Data.jpg"></td>
+</tr> 
+</p>
+<p>
+<tr>
+	<td>Accuracies and Confusion Matricies of Cross Validatioins nonlinear</td>
+ 	<td> <img src="./HW[1] Student Name [Eric Chang]_files/Five_Cross_Validation_Results.jpg"></td>
+</tr>
+</p>
+<p>
+<tr>
+ 	<td>Accuracy and Confusion Matrix of All Points Linear</td>
+ 	<td> <img src="./HW[1] Student Name [Eric Chang]_files/Result_of_All_Data_Linear.jpg"></td>
+</tr> 
+</p>
+<p>
+<tr>
+	<td>Accuracies and Confusion Matricies of Cross Validatioins Linear</td>
+ 	<td> <img src="./HW[1] Student Name [Eric Chang]_files/Five_Cross_Validation_Results_Linear.jpg"></td>
+</tr>
+</p>
+<hr>
+<h2> Results</h2>
+
+
+<p>
+<table>
+<tbody><tr><td colspan="3"><center><h3>Results</h3></center></td></tr>
+<tr>
+ 
+</tr>
+<tr>
+  <td> All Points Nonlinear</td> 
+  <td> <img src="./HW[1] Student Name [Eric Chang]_files/All_Points.jpg"></td>
+  
+</tr> 
+
+<tr>
+	<td>Untrained Data Decision Boundary Nonlinear</td>
+	<td> <img src="./HW[1] Student Name [Eric Chang]_files/Untrained_Data_Decision_Boundary.jpg"></td>
+  
+</tr> 
+
+<tr>
+ 	<td>All Points Trained Nonlinear</td>
+ 	<td> <img src="./HW[1] Student Name [Eric Chang]_files/All_Data_Trained.jpg"></td>
+</tr> 
+<tr>
+  <td> All Points Linear</td> 
+  <td> <img src="./HW[1] Student Name [Eric Chang]_files/All_Points_Linear.jpg"></td>
+  
+</tr> 
+<tr>
+	<td>Untrained Data Decision Boundary Linear</td>
+	<td> <img src="./HW[1] Student Name [Eric Chang]_files/Untrained_Data_Decision_Boundary_Linear.jpg"></td>
+  
+</tr> 
+<tr>
+ 	<td>All Points Trained Linear</td>
+ 	<td> <img src="./HW[1] Student Name [Eric Chang]_files/All_Data_Trained_Linear.jpg"></td>
+</tr> 
+
+
+
+
+</tbody></table>
+
+</p>
+
+
+
+
+<hr>
+<h2> Discussion </h2>
+
+<p> 
+Discuss your method and results:
+</p><ul>
+<li>Weakness is our cross validation as it does not work the way we wanted it to. Strength is our hidden layer as it works exactly as we planned. </li>
+<li>Our results for our hidden layer shows that our method is generally successful as we have an accuracy of around 99%. We expected to get a high accuracy for both our hidden layer and for our cross vallidation. With our hidden layer our results confirmed our hypothesis but our results for the hidden layer differed completely. </li>
+<li>For the future we would want to work more on understanding fully how the cross validation works and how to get it to come up with the result we want.</li> 
+</ul>
+<p></p>
+
+<hr>
+<h2> Conclusions </h2>
+<p>
+Question 2: <br> 
+Cross Validation: Cross Validation is important because if we just test untrained data against our trained data we wouldn't know how our method would work on data that it isn't trained on. Therefore, if we train all but part of our data and then testing the remaing part on our data we would be able to tell how accurate our method is on testing untrained data on trained data. 
+</p>
+
+<p>
+Question 3: <br>
+ Learning rate: A low learning rate could make our training too slow and it will miss a local minima, and if it is too fast it can overshoot the local minimum or fail to reach it. Therfore, a good rate will allow our data to reach a local minima in a better time making it more accurate and allowing us to require less time to train. This can be viewed below where from top to bottom we gave a training value of 001;01;05;005:
+</p>
+<p><img src="./HW[1] Student Name [Eric Chang]_files/Values_001_01.jpg"></img>
+</p>
+<p><img src="./HW[1] Student Name [Eric Chang]_files/Values_05_005.jpg"></img>
+</p>
+
+<p>
+Question 4 and 5: <br>
+ Overfitting: Overfitting is when we have trained our data too well in that for any trained data it will be super accurate, however if we gave it any untrained data it will most likely not be as accurate as we would want it to be. Ways to prevent overfitting is to use an L1 or L2 regularization, dropout rate, or early stopping. L1 or L2 regularization can be used to prevent ovefitting by simplifying our model through penalizing the loss function. Dropout rate helps prevent overfitting as it will constantly randomly drop some nodes making the system not want to favor any features, therefore allowing for a more evenly distributed weight matrix. And early stopping is where we can set a validation set and as our system trains we don't train the validation set, but we compare the trained data with the validation set. Once the performance of the validation set stops growing we should stop training as it will overfit past that point. 
+</p>
+
+
+<hr>
+<h2> Credits and Bibliography </h2>
+<p>https://towardsdatascience.com/activation-functions-and-its-types-which-is-better-a9a5310cc8f?fbclid=IwAR1aFHapvbpV0Z-HEz4PLfqp7ym29m3QLRhrF7EbF2ccMaGO-Gtbeqm5lW0 Visited on 3/5<br>
+https://towardsdatascience.com/train-test-split-and-cross-validation-in-python-80b61beca4b6 Visited on 3/6/2019 <br>
+https://towardsdatascience.com/preventing-deep-neural-network-from-overfitting-953458db800a Visited on 3/6/2019<br>
+</p>
+<hr>
+</div>
+
+
+
+
+
+</body></html>
